@@ -14,15 +14,20 @@ import java.util.logging.Level;
  */
 public class AntiBot extends JavaPlugin {
 
-    File spigotFile = new File("spigot.yml");
-    FileConfiguration spigotData = new YamlConfiguration();
+
+       public File spigotFile = new File("spigot.yml");
+    public static FileConfiguration spigotData = new YamlConfiguration();
 
     public void onEnable() {
         try {
-            spigotData.load(spigotFile);
-        } catch (IOException | InvalidConfigurationException e) {
+                  spigotData.load(spigotFile); } catch (Exception e)
+{
             e.printStackTrace();
-        }
+           getLogger().log(Level.WARNING, "Server unprotected");
+               getLogger().log(Level.INFO, "Implementing bot protection");
+              getServer().shutdown();
+                          return;
+     }
         AntiBotCheck();
     }
 
